@@ -11,7 +11,7 @@ public class Preference extends BaseEntity {
     @Column(name = "preference_id")
     private Long id;
 
-    @OneToOne(mappedBy = "user_id")
+    @OneToOne
     private User user;
 
     /*
