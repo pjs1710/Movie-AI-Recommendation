@@ -3,6 +3,10 @@ package com.movie_ai_recommend.movie_ai_recommend.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+/**
+ * 유저가 선호하는 정보에 대한 Entity
+ */
+
 @Entity
 @Data
 public class Preference extends BaseEntity {

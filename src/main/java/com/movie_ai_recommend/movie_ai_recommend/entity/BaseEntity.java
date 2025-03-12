@@ -10,6 +10,12 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
+/**
+ * 모든 Entity에 적용되는 추상 클래스 BaseEntity
+ *
+ * @comment : 생성 및 갱신한 LocalDateTime을 저장합니다.
+ */
+
 @MappedSuperclass
 @Getter
 @EntityListeners(AuditingEntityListener.class)

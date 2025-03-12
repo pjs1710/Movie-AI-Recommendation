@@ -3,6 +3,10 @@ package com.movie_ai_recommend.movie_ai_recommend.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+/**
+ * 유저 정보에 대한 Entity
+ */
+
 @Entity
 @Data
 public class User extends BaseEntity {
@@ -28,5 +32,14 @@ public class User extends BaseEntity {
      */
     @Column(name = "user_email")
     private String email;
+
+    /*
+    유저 정보 Method
+     */
+    public void setUserInfo(String userName, String password, String email) {
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+    }
 
 }

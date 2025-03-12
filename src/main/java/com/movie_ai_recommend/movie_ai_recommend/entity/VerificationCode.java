@@ -3,6 +3,10 @@ package com.movie_ai_recommend.movie_ai_recommend.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+/**
+ * 인증 번호에 대한 Entity
+ */
+
 @Entity
 @Data
 public class VerificationCode extends BaseEntity {
