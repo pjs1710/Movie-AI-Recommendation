@@ -1,6 +1,6 @@
 package com.movie_ai_recommend.movie_ai_recommend.controller.user;
 
-import com.movie_ai_recommend.movie_ai_recommend.dto.UserDto;
+import com.movie_ai_recommend.movie_ai_recommend.dto.user.UserDto;
 import com.movie_ai_recommend.movie_ai_recommend.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

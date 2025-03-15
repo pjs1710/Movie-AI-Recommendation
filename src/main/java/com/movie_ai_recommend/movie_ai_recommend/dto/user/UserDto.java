@@ -1,4 +1,4 @@
-package com.movie_ai_recommend.movie_ai_recommend.dto;
+package com.movie_ai_recommend.movie_ai_recommend.dto.user;
 
 import lombok.Data;
 
