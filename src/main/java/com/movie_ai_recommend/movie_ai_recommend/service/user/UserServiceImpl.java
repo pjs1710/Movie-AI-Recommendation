@@ -1,7 +1,7 @@
 package com.movie_ai_recommend.movie_ai_recommend.service.user;
 
-import com.movie_ai_recommend.movie_ai_recommend.dto.UserDto;
-import com.movie_ai_recommend.movie_ai_recommend.dto.VerificationCodeDto;
+import com.movie_ai_recommend.movie_ai_recommend.dto.user.UserDto;
+import com.movie_ai_recommend.movie_ai_recommend.dto.verification.VerificationCodeDto;
 import com.movie_ai_recommend.movie_ai_recommend.entity.User;
 import com.movie_ai_recommend.movie_ai_recommend.repository.UserRepository;
 import com.movie_ai_recommend.movie_ai_recommend.service.email.EmailService;

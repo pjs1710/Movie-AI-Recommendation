@@ -3,6 +3,9 @@ package com.movie_ai_recommend.movie_ai_recommend.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 유저 정보에 대한 Entity
  */
@@ -41,5 +44,8 @@ public class User extends BaseEntity {
         this.password = password;
         this.email = email;
     }
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Chat> chats = new ArrayList<>();
 
 }
