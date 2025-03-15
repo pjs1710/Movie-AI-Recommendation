@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Gemini API
+ *
+ * 1. Gemini AI 호출 API
  */
 
 @RestController
