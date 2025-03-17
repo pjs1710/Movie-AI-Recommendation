@@ -25,7 +25,7 @@ public class VerificationCode extends BaseEntity {
     인증번호
      */
     @Column(name = "verification_code_number")
-    private Integer verificationNumber;
+    private String verificationNumber;
 
     /*
     인증유무

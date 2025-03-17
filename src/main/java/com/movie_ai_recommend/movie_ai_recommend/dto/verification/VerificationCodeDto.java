@@ -6,5 +6,5 @@ import lombok.Data;
 public class VerificationCodeDto {
 
     private String email;
-    private Integer verificationNumber;
+    private String verificationNumber;
 }
