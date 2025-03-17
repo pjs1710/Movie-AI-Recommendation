@@ -1,1 +1,111 @@
-hello
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mov-mend 메인 페이지</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 80px;
+            border-radius: 16px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 1000px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 3em;
+            color: #673ab7;
+            margin-bottom: 60px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .description {
+            font-size: 1.3em;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            background-color: #673ab7;
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.3em;
+            width: auto;
+            min-width: 250px;
+            display: inline-block;
+            margin: 20px 10px;
+        }
+
+        .btn:hover {
+            background-color: #512da8;
+        }
+
+        .info {
+            font-size: 1.2em;
+            margin-top: 60px;
+        }
+
+        ul {
+            list-style-type: none; /* 목록 스타일 변경 */
+            padding-left: 0; /* 패딩 제거 */
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        li {
+            margin-bottom: 15px;
+            position: relative; /* 상대 위치 설정 */
+            padding-left: 25px; /* 패딩 추가 */
+        }
+
+        li::before {
+            content: '•'; /* 글머리 기호 변경 */
+            position: absolute; /* 절대 위치 설정 */
+            left: 0; /* 왼쪽 위치 설정 */
+            color: #673ab7; /* 색상 변경 */
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background-color: #e0e0e0; /* 구분선 색상 변경 */
+            margin: 40px 0; /* 마진 조정 */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="logo">Mov-mend</div>
+    <div class="description">환영합니다! Mov-mend는 당신의 영화 취향을 분석하여 맞춤 영화를 추천해주는 서비스입니다.</div>
+
+    <hr> <div class="form-group">
+    <a th:href="@{/preference}" class="btn">📖선호도 조사</a>
+    <a th:href="@{/recommendation}" class="btn">✔영화 추천 받기</a>
+</div>
+
+    <hr> <div class="info">
+    Mov-mend는 사용자 선호도에 맞는 영화를 추천합니다.
+    <ul>
+        <li>💡AI 영화 추천</li>
+        <li>🌟사용자 맞춤형 서비스</li>
+        <li>🎬장르별 영화 추천</li>
+    </ul>
+</div>
+</div>
+</body>
+</html>
