@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VerificationCodeRepository extends JpaRepository<VerificationCode, Long> {
 
-    VerificationCode findByEmailAndVerificationNumber(String email, Integer verificationNumber);
+    VerificationCode findByEmailAndVerificationNumber(String email, String verificationNumber);
 }

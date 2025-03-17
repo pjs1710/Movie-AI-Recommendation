@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
 
         VerificationCodeDto verificationCodeDto = new VerificationCodeDto();
         verificationCodeDto.setEmail(userDto.getEmail());
-        verificationCodeDto.setVerificationNumber(verificationNumber);
+        verificationCodeDto.setVerificationNumber(String.valueOf(verificationNumber));
         verificationCodeService.createVerificationCode(verificationCodeDto);
 
         emailService.sendVerificationEmail(userDto.getEmail(), String.valueOf(verificationNumber));
@@ -48,6 +48,10 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public void verifyAndRegisterUser(UserDto userDto) {
+        if (userDto.getVerificationNumber() == null) {
+            throw new IllegalArgumentException("인증번호를 입력해주세요.");
+        }
+
         VerificationCodeDto verificationCodeDto = new VerificationCodeDto();
         verificationCodeDto.setEmail(userDto.getEmail());
         verificationCodeDto.setVerificationNumber(userDto.getVerificationNumber());
