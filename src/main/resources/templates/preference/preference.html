@@ -81,6 +81,8 @@
 </head>
 <body>
 <div class="container">
+    <div th:replace="fragments/header.html"></div>
+
     <div class="logo">선호도 조사</div>
     <form id="preferenceForm">
         <input type="hidden" name="userId" th:value="${userId}">
@@ -96,15 +98,15 @@
         </div>
         <div class="form-group">
             <label for="favoriteActor">선호하는 배우</label>
-            <input type="text" name="favoriteActor" id="favoriteActor">
+            <input type="text" name="favoriteActor" id="favoriteActor" required>
         </div>
         <div class="form-group">
             <label for="favoriteDirector">선호하는 감독</label>
-            <input type="text" name="favoriteDirector" id="favoriteDirector">
+            <input type="text" name="favoriteDirector" id="favoriteDirector" required>
         </div>
         <div class="form-group">
             <label for="recentWatched">최근 재미있게 본 영화</label>
-            <input type="text" name="recentWatched" id="recentWatched">
+            <input type="text" name="recentWatched" id="recentWatched" required>
         </div>
         <button type="button" class="btn" onclick="submitPreference()">저장</button>
     </form>

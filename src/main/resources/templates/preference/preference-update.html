@@ -73,6 +73,8 @@
 </head>
 <body>
 <div class="container">
+    <div th:replace="fragments/header.html"></div>
+
     <div class="logo">선호도 수정</div>
     <form id="preferenceUpdateForm">
         <input type="hidden" name="userId" th:value="${preference.userId}">

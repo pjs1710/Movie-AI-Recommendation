@@ -90,12 +90,14 @@
 </head>
 <body>
 <div class="container">
+    <div th:replace="fragments/header.html"></div>
+
     <div class="logo">Mov-mend</div>
     <div class="description">환영합니다! Mov-mend는 당신의 영화 취향을 분석하여 맞춤 영화를 추천해주는 서비스입니다.</div>
 
     <hr> <div class="form-group">
     <a th:href="@{/preference(userId=${param.userId})}" class="btn">📖선호도 조사</a>
-    <a th:href="@{/recommendation}" class="btn">✔영화 추천 받기</a>
+    <a th:href="@{/recommendation(userId=${param.userId})}" class="btn">✔영화 추천 받기</a>
 </div>
 
     <hr> <div class="info">
