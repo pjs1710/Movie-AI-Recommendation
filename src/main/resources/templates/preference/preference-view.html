@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>선호도 조회</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 80px;
+            border-radius: 16px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 1000px;
+            text-align: left;
+        }
+
+        .logo {
+            font-size: 2em;
+            color: #673ab7;
+            margin-bottom: 30px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        span {
+            display: block;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            background-color: #673ab7;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .btn:hover {
+            background-color: #512da8;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="logo">선호도 조회</div>
+    <div class="form-group">
+        <label>선호하는 영화 장르:</label>
+        <span th:text="${preference.favoriteGenre}"></span>
+    </div>
+    <div class="form-group">
+        <label>선호하는 배우:</label>
+        <span th:text="${preference.favoriteActor}"></span>
+    </div>
+    <div class="form-group">
+        <label>선호하는 감독:</label>
+        <span th:text="${preference.favoriteDirector}"></span>
+    </div>
+    <div class="form-group">
+        <label>최근 재미있게 본 영화:</label>
+        <span th:text="${preference.recentWatched}"></span>
+    </div>
+</div>
+</body>
+</html>

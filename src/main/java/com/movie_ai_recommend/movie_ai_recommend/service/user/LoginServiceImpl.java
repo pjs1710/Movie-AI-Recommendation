@@ -20,7 +20,7 @@ public class LoginServiceImpl implements LoginService {
      */
     @Override
     @Transactional
-    public void login(LoginDto loginDto) {
+    public User login(LoginDto loginDto) {
         User user = userRepository.findByEmail(loginDto.getEmail())
                 .orElse(null);
         /*
@@ -29,5 +29,6 @@ public class LoginServiceImpl implements LoginService {
         if (user == null || !user.getPassword().equals(loginDto.getPassword())) {
             throw new IllegalArgumentException("이메일 또는 비밀번호가 일치하지 않습니다.");
         }
+        return user;
     }
 }
