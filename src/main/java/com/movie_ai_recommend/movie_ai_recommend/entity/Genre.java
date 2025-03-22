@@ -7,7 +7,6 @@ package com.movie_ai_recommend.movie_ai_recommend.entity;
 public enum Genre {
     ACTION,
     COMEDY,
-    DRAMA,
     ROMANCE,
     THRILLER,
     HORROR,
