@@ -5,9 +5,11 @@ import com.movie_ai_recommend.movie_ai_recommend.entity.VerificationCode;
 import com.movie_ai_recommend.movie_ai_recommend.repository.VerificationCodeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class VerificationCodeServiceImpl implements VerificationCodeService {
 
     private final VerificationCodeRepository verificationCodeRepository;
@@ -19,6 +21,7 @@ public class VerificationCodeServiceImpl implements VerificationCodeService {
      * @return
      */
     @Override
+    @Transactional
     public VerificationCode createVerificationCode(VerificationCodeDto verificationCodeDto) {
         VerificationCode verificationCode = new VerificationCode();
         verificationCode.setEmail(verificationCodeDto.getEmail());
@@ -34,6 +37,7 @@ public class VerificationCodeServiceImpl implements VerificationCodeService {
      * @return
      */
     @Override
+    @Transactional
     public boolean verifyVerificationCode(VerificationCodeDto verificationCodeDto) {
         VerificationCode verificationCode = verificationCodeRepository.findByEmailAndVerificationNumber(verificationCodeDto.getEmail(), verificationCodeDto.getVerificationNumber());
         if (verificationCode != null && !verificationCode.isVerified()) {

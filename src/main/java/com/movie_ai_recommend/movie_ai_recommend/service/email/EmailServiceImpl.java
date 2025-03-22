@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class EmailServiceImpl implements EmailService {
 
     private final JavaMailSender javaMailSender;
@@ -24,6 +26,7 @@ public class EmailServiceImpl implements EmailService {
      * @param code
      */
     @Override
+    @Transactional
     public void sendVerificationEmail(String to, String code) {
         String subject = "[Movie AI Recommendation] 회원가입 이메일 인증";
         String verificationUrl = "회원님의 인증번호는 : [" + code + "] 입니다.";
