@@ -43,6 +43,9 @@ public class PreferenceServiceImpl implements PreferenceSerivce {
     public Preference savePreference(PreferenceDto preferenceDto) {
         User user = userRepository.findById(preferenceDto.getUserId())
                 .orElseThrow(() -> new IllegalArgumentException("사용자를 찾지 못했습니다. " + preferenceDto.getUserId()));
+        if (preferenceRepository.existsByUserId(preferenceDto.getUserId())) {
+            throw new IllegalArgumentException("이미 선호도 정보가 존재합니다.");
+        }
         Preference preference = new Preference(
                 user,
                 preferenceDto.getFavoriteGenre(),
