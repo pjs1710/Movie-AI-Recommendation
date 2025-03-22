@@ -2,6 +2,7 @@ package com.movie_ai_recommend.movie_ai_recommend.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 유저가 선호하는 정보에 대한 Entity
@@ -9,6 +10,7 @@ import lombok.Data;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Preference extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,4 +45,14 @@ public class Preference extends BaseEntity {
     @Column(name = "recent_watched")
     private String recentWatched;
 
+    /*
+    선호도 Constructor
+     */
+    public Preference(User user, Genre favoriteGenre, String favoriteActor, String favoriteDirector, String recentWatched) {
+        this.user = user;
+        this.favoriteGenre = favoriteGenre;
+        this.favoriteActor = favoriteActor;
+        this.favoriteDirector = favoriteDirector;
+        this.recentWatched = recentWatched;
+    }
 }

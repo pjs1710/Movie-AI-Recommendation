@@ -10,6 +10,7 @@ import com.movie_ai_recommend.movie_ai_recommend.repository.ChatRepository;
 import com.movie_ai_recommend.movie_ai_recommend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
@@ -40,6 +41,7 @@ public class GeminiServiceImpl implements GeminiService {
     }
 
     @Override
+    @Transactional
     public GeminiDto getAnswer(GeminiDto geminiDto, Long userId) {
 
         /**

@@ -25,7 +25,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/verify")
-    public ResponseEntity<String> sendVerificationEmail(@RequestBody UserDto userDto) {
+    public ResponseEntity<?> sendVerificationEmail(@RequestBody UserDto userDto) {
         try {
             userService.sendVerificationEmail(userDto);
             return ResponseEntity.ok("이메일 인증 번호를 전송했습니다. 이메일을 확인하여 인증을 완료해주세요.");
@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody UserDto userDto) {
+    public ResponseEntity<?> register(@RequestBody UserDto userDto) {
         try {
             userService.verifyAndRegisterUser(userDto);
             return ResponseEntity.ok("회원가입이 완료되었습니다.");

@@ -5,9 +5,11 @@ import com.movie_ai_recommend.movie_ai_recommend.entity.User;
 import com.movie_ai_recommend.movie_ai_recommend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class LoginServiceImpl implements LoginService {
 
     private final UserRepository userRepository;
@@ -17,6 +19,7 @@ public class LoginServiceImpl implements LoginService {
      * @param loginDto
      */
     @Override
+    @Transactional
     public void login(LoginDto loginDto) {
         User user = userRepository.findByEmail(loginDto.getEmail())
                 .orElse(null);

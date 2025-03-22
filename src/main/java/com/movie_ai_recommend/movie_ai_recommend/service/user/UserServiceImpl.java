@@ -8,11 +8,13 @@ import com.movie_ai_recommend.movie_ai_recommend.service.email.EmailService;
 import com.movie_ai_recommend.movie_ai_recommend.service.verification.VerificationCodeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -25,6 +27,7 @@ public class UserServiceImpl implements UserService {
      * @param userDto
      */
     @Override
+    @Transactional
     public void sendVerificationEmail(UserDto userDto) {
         if (!isUserNameAvailable(userDto.getUserName())) {
             throw new IllegalArgumentException("이미 사용 중인 사용자 이름입니다.");
@@ -47,6 +50,7 @@ public class UserServiceImpl implements UserService {
      * @param userDto
      */
     @Override
+    @Transactional
     public void verifyAndRegisterUser(UserDto userDto) {
         if (userDto.getVerificationNumber() == null) {
             throw new IllegalArgumentException("인증번호를 입력해주세요.");
