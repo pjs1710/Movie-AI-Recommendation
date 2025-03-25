@@ -1,7 +1,7 @@
 package com.movie_ai_recommend.movie_ai_recommend.controller.preference;
 
 import com.movie_ai_recommend.movie_ai_recommend.dto.preference.PreferenceDto;
-import com.movie_ai_recommend.movie_ai_recommend.service.preference.PreferenceSerivce;
+import com.movie_ai_recommend.movie_ai_recommend.service.preference.PreferenceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +22,12 @@ import java.util.Map;
 @RequestMapping("/api/preference")
 public class PreferenceController {
 
-    private final PreferenceSerivce preferenceSerivce;
+    private final PreferenceService preferenceService;
 
     @PostMapping("/save")
     public ResponseEntity<?> savePreference(@RequestBody PreferenceDto preferenceDto) {
         try {
-            preferenceSerivce.savePreference(preferenceDto);
+            preferenceService.savePreference(preferenceDto);
             Map<String, String> response = new HashMap<>();
             response.put("message", "선호도가 성공적으로 저장되었습니다!");
             return ResponseEntity.ok(response);
@@ -41,7 +41,7 @@ public class PreferenceController {
     @GetMapping("/get")
     public ResponseEntity<?> getPreference(@RequestParam("userId") Long userId) {
         try {
-            PreferenceDto preference = preferenceSerivce.getPreference(userId);
+            PreferenceDto preference = preferenceService.getPreference(userId);
             return ResponseEntity.ok(preference);
         } catch (Exception e) {
             Map<String, String> errorResponse = new HashMap<>();
@@ -53,7 +53,7 @@ public class PreferenceController {
     @PutMapping("/update")
     public ResponseEntity<?> updatePreference(@RequestBody PreferenceDto preferenceDto) {
         try {
-            preferenceSerivce.updatePreference(preferenceDto);
+            preferenceService.updatePreference(preferenceDto);
             Map<String, String> response = new HashMap<>();
             response.put("message", "선호도가 성공적으로 업데이트 되었습니다!");
             return ResponseEntity.ok(response);

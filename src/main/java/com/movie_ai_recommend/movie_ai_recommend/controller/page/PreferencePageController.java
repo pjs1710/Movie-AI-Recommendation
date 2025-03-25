@@ -1,7 +1,7 @@
 package com.movie_ai_recommend.movie_ai_recommend.controller.page;
 
 import com.movie_ai_recommend.movie_ai_recommend.dto.preference.PreferenceDto;
-import com.movie_ai_recommend.movie_ai_recommend.service.preference.PreferenceSerivce;
+import com.movie_ai_recommend.movie_ai_recommend.service.preference.PreferenceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequiredArgsConstructor
 public class PreferencePageController {
 
-    private final PreferenceSerivce preferenceSerivce;
+    private final PreferenceService preferenceService;
 
     @GetMapping("/preference")
     public String preferenceForm(@RequestParam("userId") Long userId, Model model) {
@@ -27,14 +27,14 @@ public class PreferencePageController {
 
     @GetMapping("/get")
     public String getPreference(@RequestParam("userId") Long userId, Model model) {
-        PreferenceDto preference = preferenceSerivce.getPreference(userId);
+        PreferenceDto preference = preferenceService.getPreference(userId);
         model.addAttribute("preference", preference);
         return "preference/preference-view";
     }
 
     @GetMapping("/preference/update")
     public String preferenceUpdateForm(@RequestParam("userId") Long userId, Model model) {
-        PreferenceDto preference = preferenceSerivce.getPreference(userId);
+        PreferenceDto preference = preferenceService.getPreference(userId);
         model.addAttribute("preference", preference);
         return "preference/preference-update";
     }

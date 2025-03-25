@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class PreferenceServiceImpl implements PreferenceSerivce {
+public class PreferenceServiceImpl implements PreferenceService {
 
     private final PreferenceRepository preferenceRepository;
     private final UserRepository userRepository;
@@ -77,6 +77,44 @@ public class PreferenceServiceImpl implements PreferenceSerivce {
         preference.setRecentWatched(preferenceDto.getRecentWatched());
 
         return preferenceRepository.save(preference);
+    }
+
+    /**
+     * 사용자 맞춤형 영화 취향 Customizing Prompt를 구성하는 로직입니다.
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    @Transactional
+    public String composeMovieRecommendationPrompt(Long userId) {
+        Preference preference = preferenceRepository.findByUserId(userId);
+        if (preference == null) {
+            return "선호도 조사는 필수입니다.";
+        }
+
+        StringBuilder prompt = new StringBuilder();
+        prompt.append("저의 영화 취향에 맞는 영화를 추천해주세요.\n");
+
+        if (preference.getFavoriteGenre() != null) {
+            prompt.append("선호하는 장르는 ").append(preference.getFavoriteGenre()).append("입니다.\n");
+        }
+
+        if (preference.getFavoriteActor() != null) {
+            prompt.append("선호하는 배우는 ").append(preference.getFavoriteActor()).append("입니다.\n");
+        }
+
+        if (preference.getFavoriteDirector() != null) {
+            prompt.append("선호하는 감독은 ").append(preference.getFavoriteDirector()).append("입니다.\n");
+        }
+
+        if (preference.getRecentWatched() != null) {
+            prompt.append("최근에 가장 재밌게 본 영화는 ").append(preference.getRecentWatched()).append("입니다.\n");
+        }
+
+        prompt.append("이 정보를 바탕으로 제가 좋아할 만한 영화를 추천해주세요.");
+
+        return prompt.toString();
     }
 
     private PreferenceDto convertToDto(Preference preference) {
