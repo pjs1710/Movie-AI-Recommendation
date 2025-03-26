@@ -1,6 +1,7 @@
 package com.movie_ai_recommend.movie_ai_recommend.controller.gemini;
 
-import com.movie_ai_recommend.movie_ai_recommend.dto.gemini.GeminiDto;
+import com.movie_ai_recommend.movie_ai_recommend.dto.gemini.GeminiRequestDto;
+import com.movie_ai_recommend.movie_ai_recommend.dto.gemini.GeminiResponseDto;
 import com.movie_ai_recommend.movie_ai_recommend.service.gemini.GeminiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,9 +25,9 @@ public class GeminiController {
     private final GeminiService geminiService;
 
     @PostMapping("/ask")
-    public ResponseEntity<?> askGemini(@RequestBody GeminiDto geminiDto) {
+    public ResponseEntity<?> askGemini(@RequestBody GeminiRequestDto geminiRequestDto) {
         try {
-            GeminiDto response = geminiService.getAnswer(geminiDto, geminiDto.getUserId());
+            GeminiResponseDto response = geminiService.getAnswer(geminiRequestDto);
             return ResponseEntity.ok(response);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

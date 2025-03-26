@@ -1,8 +1,9 @@
 package com.movie_ai_recommend.movie_ai_recommend.service.gemini;
 
-import com.movie_ai_recommend.movie_ai_recommend.dto.gemini.GeminiDto;
+import com.movie_ai_recommend.movie_ai_recommend.dto.gemini.GeminiRequestDto;
+import com.movie_ai_recommend.movie_ai_recommend.dto.gemini.GeminiResponseDto;
 
 public interface GeminiService {
 
-    GeminiDto getAnswer(GeminiDto geminiDto, Long userId);
+    GeminiResponseDto getAnswer(GeminiRequestDto geminiRequestDto);
 }
