@@ -3,11 +3,13 @@ package com.movie_ai_recommend.movie_ai_recommend.service.gemini;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.movie_ai_recommend.movie_ai_recommend.dto.gemini.GeminiDto;
+import com.movie_ai_recommend.movie_ai_recommend.dto.gemini.GeminiRequestDto;
+import com.movie_ai_recommend.movie_ai_recommend.dto.gemini.GeminiResponseDto;
 import com.movie_ai_recommend.movie_ai_recommend.entity.Chat;
 import com.movie_ai_recommend.movie_ai_recommend.entity.User;
 import com.movie_ai_recommend.movie_ai_recommend.repository.ChatRepository;
 import com.movie_ai_recommend.movie_ai_recommend.repository.UserRepository;
+import com.movie_ai_recommend.movie_ai_recommend.service.preference.PreferenceService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,22 +35,30 @@ public class GeminiServiceImpl implements GeminiService {
     private final WebClient webClient;
     private final ChatRepository chatRepository;
     private final UserRepository userRepository;
+    private final PreferenceService preferenceService;
 
-    public GeminiServiceImpl(Builder webClient, ChatRepository chatRepository, UserRepository userRepository) {
+    public GeminiServiceImpl(Builder webClient, ChatRepository chatRepository, UserRepository userRepository, PreferenceService preferenceService) {
         this.webClient = webClient.build();
         this.chatRepository = chatRepository;
         this.userRepository = userRepository;
+        this.preferenceService = preferenceService;
     }
 
     @Override
     @Transactional
-    public GeminiDto getAnswer(GeminiDto geminiDto, Long userId) {
+    public GeminiResponseDto getAnswer(GeminiRequestDto geminiRequestDto) {
 
         /**
          * 사용자 조회 로직
          */
-        User user = userRepository.findById(geminiDto.getUserId())
+        User user = userRepository.findById(geminiRequestDto.getUserId())
                 .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
+
+        /**
+         * 사용자 맞춤형 프롬프트 구성
+         */
+        String customizedPrompt = preferenceService.composeMovieRecommendationPrompt(geminiRequestDto.getUserId());
+
 
         /**
          * Request Payload 구성
@@ -56,7 +66,7 @@ public class GeminiServiceImpl implements GeminiService {
         Map<String, Object> requestBody = Map.of(
                 "contents", new Object[] {
                         Map.of("parts", new Object[] {
-                                Map.of("text", geminiDto.getPrompt())
+                                Map.of("text", customizedPrompt)
                         })
                 }
         );
@@ -102,13 +112,16 @@ public class GeminiServiceImpl implements GeminiService {
             /**
              * 채팅 내용 저장
              */
-            Chat chat = new Chat(user, geminiDto.getPrompt(), text);
+            Chat chat = new Chat(user, customizedPrompt, text);
             chatRepository.save(chat);
-            GeminiDto resultDto = new GeminiDto(geminiDto.getUserId(), text);
+
             /**
              * DTO 반환
              */
-            return resultDto;
+            GeminiResponseDto responseDto = new GeminiResponseDto();
+            responseDto.setPrompt(text);
+
+            return responseDto;
         } catch (JsonProcessingException e) {
             throw new IllegalArgumentException("Json 파싱 에러입니다.");
         }
