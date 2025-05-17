@@ -81,8 +81,7 @@
 </head>
 <body>
 <div class="container">
-    <div th:replace="fragments/header.html"></div>
-
+    <div th:replace="~{fragments/header :: header}"></div>
     <div class="logo">선호도 조사</div>
     <form id="preferenceForm">
         <input type="hidden" name="userId" th:value="${userId}">

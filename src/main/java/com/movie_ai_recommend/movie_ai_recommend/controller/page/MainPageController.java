@@ -15,15 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MainPageController {
 
     @GetMapping("/main")
-    public String mainPage(@RequestParam("userId") Long userId, HttpSession session, Model model) {
+    public String mainPage(@RequestParam(value = "userId", required = false) Long userId, HttpSession session, Model model) {
         if (userId != null) {
             session.setAttribute("userId", userId);
         } else {
             userId = (Long) session.getAttribute("userId");
         }
-
         model.addAttribute("userId", userId);
-
         return "main";
     }
 }

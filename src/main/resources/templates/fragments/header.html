@@ -1,5 +1,5 @@
-<div class="header">
-    <a th:href="@{/main(userId=${param.userId})}" class="home-button">🏠 홈</a>
+<div class="header" th:fragment="header">
+    <a th:href="@{/main(userId=${userId})}" class="home-button">🏠 홈</a>
 </div>
 
 <style>
