@@ -73,8 +73,7 @@
 </head>
 <body>
 <div class="container">
-    <div th:replace="fragments/header.html"></div>
-
+    <div th:replace="~{fragments/header :: header}"></div>
     <div class="logo">선호도 조회</div>
     <div class="form-group">
         <label>선호하는 영화 장르:</label>
